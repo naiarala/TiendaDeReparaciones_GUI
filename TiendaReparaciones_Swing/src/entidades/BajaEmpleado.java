@@ -27,6 +27,7 @@ public class BajaEmpleado implements Serializable {
 	private LocalDate fechaInicio = LocalDate.now();
 	private LocalDate fechaFin;
 	private String motivoBaja;
+	private Empleado em;
 
 	/**
 	 * Carga ligera: Implementar en esta clase la relación (1-N) que tiene con la

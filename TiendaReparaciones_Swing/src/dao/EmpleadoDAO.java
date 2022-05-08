@@ -2,18 +2,16 @@ package dao;
 
 import java.util.Collection;
 
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import entidades.Empleado;
-import utils.Datos;
 import utils.ConexBD;
-import utils.Datos;
 
 public class EmpleadoDAO implements operacionesCRUD<Empleado> {
 	Connection conex;
@@ -66,7 +64,7 @@ public class EmpleadoDAO implements operacionesCRUD<Empleado> {
 			pstmt.setString(5, em.getNif());
 			int resultadoInsercion = pstmt.executeUpdate();
 			if (resultadoInsercion == 1) {
-				String consultaSelect = "SELECT id FROM empleado WHERE (nombre=? AND telefono=? " + "AND nif=?)";
+				String consultaSelect = "SELECT id FROM empleado WHERE (nombre=? AND apellidos=? AND direccion=? AND telefono=? " + "AND nif=?)";
 				PreparedStatement pstmt2 = conex.prepareStatement(consultaSelect);
 				pstmt2.setString(1, em.getNombre());
 				pstmt2.setString(2, em.getApellidos());
@@ -146,8 +144,7 @@ public class EmpleadoDAO implements operacionesCRUD<Empleado> {
 			while (result.next()) {
 				Empleado empleado;
 				long idBD = result.getLong("id");
-				float altura = result.getFloat("altura");
-				float peso = result.getFloat("peso");
+
 				empleado = new Empleado();
 				empleado.setIdEmpleado(idBD);
 				String nombre = result.getString("nombre");

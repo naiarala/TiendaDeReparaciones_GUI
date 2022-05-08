@@ -90,14 +90,26 @@ public class Lote {
 		this.precioTotal = precioTotal;
 	}
 
+	public double getPrecioEquipo() {
+		return precioEquipo;
+	}
+
+	public void setPrecioEquipo(double precioEquipo) {
+		this.precioEquipo = precioEquipo;
+	}
+	public long getIdCompra() {
+		return idCompra;
+	}
+	public void setIdCompra(long idCompra) {
+		this.idCompra = idCompra;
+	}
+
 	// to string
 	@Override
 	public String toString() {
 		return "Lote [idLote=" + idLote + ", descuento=" + descuento + ", precioTotal=" + precioTotal + "]";
 	}
 
-	public long getIdCompra() {
-		return idCompra;
-	}
+
 
 }

@@ -57,7 +57,7 @@ public class BajaEmpleadoDAO {
 	public long insertarSinID(BajaEmpleado be) {
 		long ret = -1;
 
-		String consultaInsertStr = "insert into empleado( fechaInicio, fechaFin, motivoBaja, idEmpleado) values (?,?,?,?,?)";
+		String consultaInsertStr = "insert into bajaempleado( fechaInicio, fechaFin, motivoBaja, idEmpleado) values (?,?,?,?,?)";
 
 		try {
 			if (this.conex == null || this.conex.isClosed())

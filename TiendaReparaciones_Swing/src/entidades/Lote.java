@@ -96,4 +96,8 @@ public class Lote {
 		return "Lote [idLote=" + idLote + ", descuento=" + descuento + ", precioTotal=" + precioTotal + "]";
 	}
 
+	public long getIdCompra() {
+		return idCompra;
+	}
+
 }

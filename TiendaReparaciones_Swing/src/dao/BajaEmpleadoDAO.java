@@ -17,7 +17,7 @@ import entidades.BajaEmpleado;
 import entidades.Empleado;
 import utils.ConexBD;
 
-public class BajaEmpleadoDAO {
+public class BajaEmpleadoDAO{
 	Connection conex;
 
 	public BajaEmpleadoDAO(Connection conex) {
@@ -117,14 +117,33 @@ public class BajaEmpleadoDAO {
 			while (result.next()) {
 				long idBD = result.getLong("idbaja");
 				BajaEmpleado bajaempleado;
-//				LocalDate fechaInicio = result.getDate(fechaInicio);
-//				LocalDate fechaFin = result.getDate(fechaFin);
+				
+				
+				//Lo consigo en Localdate y lo inserto en ret (BajaEmpleado)
+				LocalDate fechaInicio = LocalDate.parse(result.getString(1));
+				ret.setFechaInicio(fechaInicio);
+				LocalDate FechaFin = LocalDate.parse(result.getString(2));
+				ret.setFechaFin(FechaFin);
+				///////////////////////////
+				
+				
+				//lo conseguimos en tipo Date y luego lo pasamos a Localdate
+				//Date fechaInicio=Date.valueOf(result.getString(1));
+				//Date fechaFin=Date.valueOf(result.getString(2));
+				
+				//ret.setFechaInicio(fechaInicio.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+				//ret.setFechaFin(fechaFin.toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+				//////////////////////
+				
+				
+				
+			
+
 				String motivoBaja = result.getString("motivoBaja");
 				long idEmpleado = result.getLong("idEmpleado");
 				ret = new BajaEmpleado();
 				ret.setIdBaja(idBD);
-//				ret.setFechaInicio(fechaInicio);
-//				ret.setFechaFin(fechaFin);
+				
 				ret.setMotivoBaja(motivoBaja);
 				ret.setIdEmpleado(idEmpleado);
 				

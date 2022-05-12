@@ -17,7 +17,7 @@ import entidades.BajaEmpleado;
 import entidades.Empleado;
 import utils.ConexBD;
 
-public class BajaEmpleadoDAO{
+public class BajaEmpleadoDAO implements operacionesCRUD <BajaEmpleado>{
 	Connection conex;
 
 	public BajaEmpleadoDAO(Connection conex) {
@@ -28,7 +28,8 @@ public class BajaEmpleadoDAO{
 		    return Instant.ofEpochMilli(date.getTime()).atZone(ZoneId.systemDefault()).toLocalDate();
 		  }
 
-	public boolean insertarConID(BajaEmpleado be) {
+		@Override
+		public boolean insertarConID(BajaEmpleado be) {
 		boolean ret = false;
 
 		String consultaInsertStr = "insert into bajaempleado(idbaja, fechaInicio, fechaFin, motivoBaja, idEmpleado) values (?,?,?,?,?)";
@@ -54,6 +55,7 @@ public class BajaEmpleadoDAO{
 		return ret;
 	}
 
+	@Override
 	public long insertarSinID(BajaEmpleado be) {
 		long ret = -1;
 
@@ -105,6 +107,7 @@ public class BajaEmpleadoDAO{
 		return ret;
 	}
 
+	@Override
 	public BajaEmpleado buscarPorID(long id) {
 		BajaEmpleado ret = null;
 		String consultaInsertStr = "select * FROM bajaempleado WHERE id=?"; 
@@ -159,7 +162,8 @@ public class BajaEmpleadoDAO{
 		}
 		return ret;
 	}
-
+	
+	@Override
 	public Collection<BajaEmpleado> buscarTodos() {
 		List<BajaEmpleado> todos = new ArrayList<>();
 		String consultaInsertStr = "select * FROM bajaempleado";
@@ -197,6 +201,7 @@ public class BajaEmpleadoDAO{
 		return todos;
 	}
 
+	@Override
 	public boolean modificar(BajaEmpleado be) {
 		boolean ret = true;
 		Connection conex = ConexBD.establecerConexion();
@@ -223,7 +228,8 @@ public class BajaEmpleadoDAO{
 		}
 		return ret;
 	}
-
+	
+	@Override
 	public boolean eliminar(BajaEmpleado be) {
 		boolean ret = true;
 		Connection conex = ConexBD.establecerConexion();
@@ -243,5 +249,6 @@ public class BajaEmpleadoDAO{
 		}
 		return ret;
 	}
+
 
 }

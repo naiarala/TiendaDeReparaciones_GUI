@@ -12,7 +12,7 @@ import java.util.List;
 import entidades.Lote;
 import utils.ConexBD;
 
-public class LoteDAO {
+public class LoteDAO implements operacionesCRUD<Lote> {
 
 	Connection conex;
 
@@ -21,6 +21,7 @@ public class LoteDAO {
 			this.conex = conex;
 	}
 
+	@Override
 	public boolean insertarConID(Lote l) {
 		boolean ret = false;
 
@@ -45,6 +46,7 @@ public class LoteDAO {
 		return ret;
 	}
 
+	@Override
 	public long insertarSinID(Lote l) {
 		long ret = -1;
 
@@ -59,7 +61,8 @@ public class LoteDAO {
 			pstmt.setDouble(3, l.getPrecioEquipo());
 			int resultadoInsercion = pstmt.executeUpdate();
 			if (resultadoInsercion == 1) {
-				String consultaSelect = "SELECT id FROM lote WHERE (descuento=? AND precioTotal=? AND precioEquipo=?" + "AND idCompra=?)";
+				String consultaSelect = "SELECT id FROM lote WHERE (descuento=? AND precioTotal=? AND precioEquipo=?"
+						+ "AND idCompra=?)";
 				PreparedStatement pstmt2 = conex.prepareStatement(consultaSelect);
 				pstmt.setDouble(1, l.getDescuento());
 				pstmt.setDouble(2, l.getPrecioTotal());
@@ -89,6 +92,7 @@ public class LoteDAO {
 		return ret;
 	}
 
+	@Override
 	public Lote buscarPorID(long id) {
 		Lote ret = null;
 		String consultaInsertStr = "select * FROM lote WHERE id=?";
@@ -103,7 +107,7 @@ public class LoteDAO {
 				Double descuento = result.getDouble("descuento");
 				Double precioTotal = result.getDouble("precioTotal");
 				Double precioEquipo = result.getDouble("precioEquipo");
-				long idCompra= result.getLong("idCompra");
+				long idCompra = result.getLong("idCompra");
 				ret = new Lote();
 				ret.setIdLote(idBD);
 				ret.setDescuento(descuento);
@@ -123,6 +127,7 @@ public class LoteDAO {
 		return ret;
 	}
 
+	@Override
 	public Collection<Lote> buscarTodos() {
 		List<Lote> todos = new ArrayList<>();
 		String consultaInsertStr = "select * FROM lote";
@@ -161,10 +166,12 @@ public class LoteDAO {
 		return todos;
 	}
 
+	@Override
 	public boolean modificar(Lote l) {
 		boolean ret = true;
 		Connection conex = ConexBD.establecerConexion();
-		String consultaInsertStr = "update lote SET descuento=?, precioTotal=?, precioEquipo=?, idCompra=? WHRERE id=" + l.getIdLote();
+		String consultaInsertStr = "update lote SET descuento=?, precioTotal=?, precioEquipo=?, idCompra=? WHRERE id="
+				+ l.getIdLote();
 		try {
 			PreparedStatement pstmt = conex.prepareStatement(consultaInsertStr);
 			pstmt.setDouble(1, l.getDescuento());
@@ -185,6 +192,7 @@ public class LoteDAO {
 		return ret;
 	}
 
+	@Override
 	public boolean eliminar(Lote l) {
 		boolean ret = true;
 		Connection conex = ConexBD.establecerConexion();

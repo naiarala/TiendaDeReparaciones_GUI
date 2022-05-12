@@ -17,7 +17,7 @@ import entidades.BajaEmpleado;
 import entidades.EmpleadoSustituto;
 import utils.ConexBD;
 
-public class EmpleadoSustitutoDAO {
+public class EmpleadoSustitutoDAO implements operacionesCRUD<EmpleadoSustituto> {
 
 	Connection conex;
 
@@ -26,7 +26,8 @@ public class EmpleadoSustitutoDAO {
 			this.conex = conex;
 	}
 
-public boolean insertarConID(EmpleadoSustituto es) {
+	@Override
+	public boolean insertarConID(EmpleadoSustituto es) {
 		boolean ret = false;
 
 		String consultaInsertStr = "insert into empleadosustituto(edad, colectivo, baja, idEmpleado) values (?,?,?,?)";
@@ -49,6 +50,7 @@ public boolean insertarConID(EmpleadoSustituto es) {
 		return ret;
 	}
 
+	@Override
 	public long insertarSinID(EmpleadoSustituto es) {
 		long ret = -1;
 
@@ -95,9 +97,10 @@ public boolean insertarConID(EmpleadoSustituto es) {
 		return ret;
 	}
 
+	@Override
 	public EmpleadoSustituto buscarPorID(long id) {
 		EmpleadoSustituto ret = null;
-		String consultaInsertStr = "select * FROM empleadosustituto WHERE id=?"; 
+		String consultaInsertStr = "select * FROM empleadosustituto WHERE id=?";
 		try {
 			if (this.conex == null || this.conex.isClosed())
 				this.conex = ConexBD.establecerConexion();
@@ -116,7 +119,7 @@ public boolean insertarConID(EmpleadoSustituto es) {
 				ret.setColectivo(colectivo);
 				ret.setBaja(baja);
 				ret.setIdEmpleado(idEmpleado);
-				
+
 			}
 			if (conex != null)
 				conex.close();
@@ -130,6 +133,7 @@ public boolean insertarConID(EmpleadoSustituto es) {
 		return ret;
 	}
 
+	@Override
 	public Collection<EmpleadoSustituto> buscarTodos() {
 		List<EmpleadoSustituto> todos = new ArrayList<>();
 		String consultaInsertStr = "select * FROM empleadosustituto";
@@ -165,10 +169,12 @@ public boolean insertarConID(EmpleadoSustituto es) {
 		return todos;
 	}
 
+	@Override
 	public boolean modificar(EmpleadoSustituto es) {
 		boolean ret = true;
 		Connection conex = ConexBD.establecerConexion();
-		String consultaInsertStr = "update empleadosustituto SET edad=?, colectivo=?, baja=? WHRERE id=" + es.getIdEmpleado();
+		String consultaInsertStr = "update empleadosustituto SET edad=?, colectivo=?, baja=? WHRERE id="
+				+ es.getIdEmpleado();
 		try {
 			PreparedStatement pstmt = conex.prepareStatement(consultaInsertStr);
 			pstmt.setString(1, es.getEdad());
@@ -189,6 +195,7 @@ public boolean insertarConID(EmpleadoSustituto es) {
 		return ret;
 	}
 
+	@Override
 	public boolean eliminar(EmpleadoSustituto es) {
 		boolean ret = true;
 		Connection conex = ConexBD.establecerConexion();

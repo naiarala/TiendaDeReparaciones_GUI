@@ -10,6 +10,7 @@ public class Grupo {
 	//referencia a empleados taller debido a la multiplicidad N-M
 	private EmpleadoTaller [] empleadosTaller;
 	//la referencia a grupo se supone se haria en reparacion
+	private Reparacion [] reparaciones;
 	
 	public Grupo() {
 
@@ -39,6 +40,15 @@ public class Grupo {
 		//aqui se haria la introducción de los datos del array empleadosTaller
 
 		return ret;
+	}
+
+	
+	public Reparacion[] getReparaciones() {
+		return reparaciones;
+	}
+
+	public void setReparaciones(Reparacion[] reparaciones) {
+		this.reparaciones = reparaciones;
 	}
 
 	public String getNombreGrupo() {

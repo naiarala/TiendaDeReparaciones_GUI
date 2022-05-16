@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-05-2022 a las 17:54:34
--- Versión del servidor: 10.4.21-MariaDB
--- Versión de PHP: 7.3.30
+-- Tiempo de generación: 16-05-2022 a las 02:14:15
+-- Versión del servidor: 10.4.22-MariaDB
+-- Versión de PHP: 8.1.2
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -106,7 +106,8 @@ CREATE TABLE `empleadorepartidor` (
 DROP TABLE IF EXISTS `empleadotaller`;
 CREATE TABLE `empleadotaller` (
   `senior` tinyint(1) DEFAULT NULL,
-  `idempleado` int(11) NOT NULL
+  `idempleado` int(11) NOT NULL,
+  `idgrupo` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -147,9 +148,9 @@ CREATE TABLE `equipo` (
 
 DROP TABLE IF EXISTS `grupo`;
 CREATE TABLE `grupo` (
-  `nombregrupo` int(11) NOT NULL,
   `idempleado` int(11) NOT NULL,
-  `idreparacion` int(11) NOT NULL
+  `idreparacion` int(11) NOT NULL,
+  `nombreGrupo` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -259,6 +260,7 @@ ALTER TABLE `empleadorepartidor`
 -- Indices de la tabla `empleadotaller`
 --
 ALTER TABLE `empleadotaller`
+  ADD UNIQUE KEY `idgrupo` (`idgrupo`),
   ADD KEY `idempleado` (`idempleado`);
 
 --
@@ -280,6 +282,7 @@ ALTER TABLE `equipo`
 -- Indices de la tabla `grupo`
 --
 ALTER TABLE `grupo`
+  ADD UNIQUE KEY `nombreGrupo` (`nombreGrupo`),
   ADD KEY `idempleado` (`idempleado`),
   ADD KEY `idreparacion` (`idreparacion`);
 

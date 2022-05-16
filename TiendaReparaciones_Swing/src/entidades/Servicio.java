@@ -27,6 +27,14 @@ public class Servicio {
 		this.idCliente = idCl;
 	}
 
+	
+
+	public Servicio(long idServicio, double precioTotal) {
+		super();
+		this.idServicio = idServicio;
+		this.precioTotal = precioTotal;
+	}
+
 	public static Servicio nuevoServicio(String s) {
 		/* instancia del teclado */
 		Scanner teclado = new Scanner(System.in);
